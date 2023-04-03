@@ -72,7 +72,12 @@ class PolicyGradient(object):
         """
         #######################################################
         #########   YOUR CODE HERE - 8-12 lines.   ############
-
+        network = build_mlp(self.observation_dim, self.action_dim, self.config.n_layers, self.config.size)
+        if self.discrete:
+            self.policy = CategoricalPolicy(network)
+        else:
+            self.policy = GaussianPolicy(network, self.action_dim)
+        self.optimizer = torch.optim.Adam(params=self.policy.parameters(), lr=self.lr)
         #######################################################
         #########          END YOUR CODE.          ############
 
