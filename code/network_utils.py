@@ -29,8 +29,7 @@ def build_mlp(input_size, output_size, n_layers, size):
         nn.Linear(input_size, size),
         nn.ReLU(),
         *([nn.Linear(size, size), nn.ReLU()] * (n_layers - 1)),
-        nn.Linear(size, output_size),
-        nn.ReLU()
+        nn.Linear(size, output_size)
     )
     #######################################################
     #########          END YOUR CODE.          ############

@@ -44,19 +44,19 @@ class BasePolicy:
         #######################################################
         #########   YOUR CODE HERE - 1-4 lines.    ############
         distribution = self.action_distribution(observations)
-        sampled_actions = distribution.sample().numpy()
-        log_probs = distribution.log_prob(sampled_actions).numpy()
+        sampled_actions = distribution.sample().cpu().numpy()
+        log_probs = distribution.log_prob(np2torch(sampled_actions)).cpu().detach().numpy()
         #######################################################
         #########          END YOUR CODE.          ############
         if return_log_prob:
-            return sampled_actions.to(device), log_probs.to(device)
-        return sampled_actions.to(device)
+            return sampled_actions, log_probs
+        return sampled_actions
 
 
 class CategoricalPolicy(BasePolicy, nn.Module):
     def __init__(self, network):
         nn.Module.__init__(self)
-        self.network = network.to(device)
+        self.network = network
 
     def action_distribution(self, observations):
         """
@@ -70,11 +70,11 @@ class CategoricalPolicy(BasePolicy, nn.Module):
         """
         #######################################################
         #########   YOUR CODE HERE - 1-2 lines.    ############
-        logits = self.network(observations)
+        logits = self.network(observations).to(device)
         distribution = ptd.Categorical(logits=logits)
         #######################################################
         #########          END YOUR CODE.          ############
-        return distribution.to(device)
+        return distribution
 
 
 class GaussianPolicy(BasePolicy, nn.Module):
@@ -103,10 +103,10 @@ class GaussianPolicy(BasePolicy, nn.Module):
         """
         #######################################################
         #########   YOUR CODE HERE - 1 line.       ############
-        std = torch.exp(self.log_std)
+        std = torch.exp(self.log_std).to(device)
         #######################################################
         #########          END YOUR CODE.          ############
-        return std.to(device)
+        return std
 
     def action_distribution(self, observations):
         """
@@ -128,8 +128,8 @@ class GaussianPolicy(BasePolicy, nn.Module):
         #######################################################
         #########   YOUR CODE HERE - 2-4 lines.    ############
         scale = self.std()
-        loc = self.network(observations)
+        loc = self.network(observations).to(device)
         distribution = ptd.MultivariateNormal(loc=loc, scale_tril=torch.diag(scale))
         #######################################################
         #########          END YOUR CODE.          ############
-        return distribution.to(device)
+        return distribution

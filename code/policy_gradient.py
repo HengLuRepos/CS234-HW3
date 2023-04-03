@@ -199,7 +199,7 @@ class PolicyGradient(object):
             returns[len(rewards) - 1] = rewards[len(rewards) - 1]
             for index, reward in reversed(list(enumerate(rewards))):
                 if index < len(rewards) - 1:
-                    returns[index] = returns[index] * self.config.gamma + rewards[index]
+                    returns[index] = returns[index + 1] * self.config.gamma + rewards[index]
             #######################################################
             #########          END YOUR CODE.          ############
             all_returns.append(returns)
@@ -277,8 +277,8 @@ class PolicyGradient(object):
         advantages = np2torch(advantages)
         #######################################################
         #########   YOUR CODE HERE - 5-7 lines.    ############
-        log_prob = self.policy.action_distribution(observations).log_prob(actions)
-        loss = -torch.sum(torch.mul(log_prob, advantages))
+        log_prob = self.policy.action_distribution(observations).log_prob(actions).to(device)
+        loss = -torch.sum(torch.mul(log_prob, advantages)).to(device)
         self.optimizer.zero_grad()
         loss.backward()
         self.optimizer.step()
