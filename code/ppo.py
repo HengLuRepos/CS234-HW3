@@ -47,7 +47,15 @@ class PPO(PolicyGradient):
 
         #######################################################
         #########   YOUR CODE HERE - 10-15 lines.   ###########
-
+        log_prob = self.policy.action_distribution(observations).log_prob(actions).to(device)
+        r_theta = torch.exp(log_prob - old_logprobs)
+        clip_r_theta = torch.clip(r_theta, 1 - self.eps_clip, 1 + self.eps_clip).to(device)
+        adv = torch.mul(r_theta, advantages)
+        clipped_adv = torch.mul(clip_r_theta, advantages)
+        loss = -torch.sum(torch.min(adv, clipped_adv))
+        self.optimizer.zero_grad()
+        loss.backward()
+        self.optimizer.step()
         #######################################################
         #########          END YOUR CODE.          ############
 
