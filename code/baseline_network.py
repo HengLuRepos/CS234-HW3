@@ -3,7 +3,6 @@ import torch
 import torch.nn as nn
 from network_utils import build_mlp, device, np2torch
 
-
 class BaselineNetwork(nn.Module):
     """
     Class for implementing Baseline network
@@ -26,8 +25,7 @@ class BaselineNetwork(nn.Module):
 
         #######################################################
         #########   YOUR CODE HERE - 2-8 lines.   #############
-        self.action_dim = self.env.action_space.shape[0]
-        self.network = build_mlp(observation_dim, self.action_dim, self.config.n_layers, self.config.layer_size).to(device)
+        self.network = build_mlp(observation_dim, 1, self.config.n_layers, self.config.layer_size).to(device)
         self.optimizer = torch.optim.Adam(self.network.parameters(), lr=self.lr)
         #######################################################
         #########          END YOUR CODE.          ############
@@ -52,7 +50,7 @@ class BaselineNetwork(nn.Module):
         """
         #######################################################
         #########   YOUR CODE HERE - 1 lines.     #############
-        output = self.network(observations).squeeze()
+        output = self.network(observations.to(device)).squeeze()
         #######################################################
         #########          END YOUR CODE.          ############
         assert output.ndim == 1

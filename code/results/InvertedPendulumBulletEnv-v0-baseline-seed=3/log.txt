@@ -1342,3 +1342,14 @@
 2023-04-03 12:50:51,175:DEBUG: findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segmdl2.ttf', name='Segoe MDL2 Assets', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
 2023-04-03 12:50:51,175:DEBUG: findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\palai.ttf', name='Palatino Linotype', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
 2023-04-03 12:50:51,175:DEBUG: findfont: Matching sans\-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('C:\\Users\\Hercu\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans.ttf') with score of 0.050000.
+2023-04-03 17:49:36,519:INFO: [ITERATION 0]: Average reward: 22.06 +/- 0.52
+2023-04-03 17:50:03,757:INFO: [ITERATION 1]: Average reward: 28.92 +/- 0.78
+2023-04-03 17:50:31,233:INFO: [ITERATION 2]: Average reward: 31.62 +/- 1.14
+2023-04-03 17:50:57,864:INFO: [ITERATION 3]: Average reward: 41.29 +/- 1.38
+2023-04-03 17:51:26,826:INFO: [ITERATION 4]: Average reward: 48.78 +/- 1.95
+2023-04-03 17:52:00,168:INFO: [ITERATION 5]: Average reward: 61.72 +/- 2.30
+2023-04-03 17:52:33,073:INFO: [ITERATION 6]: Average reward: 80.07 +/- 3.63
+2023-04-03 17:53:06,707:INFO: [ITERATION 7]: Average reward: 92.48 +/- 4.24
+2023-04-03 17:53:33,406:INFO: [ITERATION 8]: Average reward: 118.34 +/- 5.45
+2023-04-03 17:54:00,284:INFO: [ITERATION 9]: Average reward: 161.43 +/- 10.13
+2023-04-03 17:54:27,473:INFO: [ITERATION 10]: Average reward: 342.86 +/- 39.90

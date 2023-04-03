@@ -56,7 +56,7 @@ class BasePolicy:
 class CategoricalPolicy(BasePolicy, nn.Module):
     def __init__(self, network):
         nn.Module.__init__(self)
-        self.network = network
+        self.network = network.to(device)
 
     def action_distribution(self, observations):
         """
